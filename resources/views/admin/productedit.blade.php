@@ -42,7 +42,6 @@
               </ul>
           </div>
       @endif
-
       {{-- CAMBIO 3: Alpine.js ahora se inicializa con la imagen actual del producto --}}
       <div class="flex-shrink-0 w-full md:w-96" x-data="{ imagePreview: '{{ $producto->image ? asset('storage/' . $producto->image) : null }}' }">
         <div class="h-96 bg-white rounded-2xl p-4 flex flex-col items-center justify-center relative overflow-hidden shadow-lg border border-gray-300">
@@ -104,7 +103,7 @@
           <div>
             <label for="subcategoria_id" class="block text-sm font-medium mb-1">Subcategoría</label>
 
-            <select id="subcategoria_id" name="subcategoria_id" x-model="selectedSubcategory" x-data=electedSubcategory: document.getElementById('subcategoria_actual').value>
+            <select id="subcategoria_id" name="subcategoria_id" x-model="selectedSubcategory" x-data=electedSubcategory: document.getElementById('subcategoria_actual').value class="w-full rounded-xl border border-gray-300 bg-white text-gray-900 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-600" required>
                 <option value="">Selecciona una subcategoría</option>
                 <template x-for="subcategory in subcategories" :key="subcategory.id">
                     <option :value="subcategory.id" x-text="subcategory.subcategoria" :selected="subcategory.id == selectedSubcategory"></option>

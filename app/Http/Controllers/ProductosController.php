@@ -42,6 +42,40 @@ class ProductosController extends Controller
         return view('admin.search', compact('productos', 'search'));
     }
 
+    public function search(Request $request){
+        // 1. Obtenemos el término de búsqueda de la URL (?search=valor)
+        $search = $request->input('search');
+
+        // 2. Iniciamos una consulta para el modelo Productos
+        // Usar query() nos permite añadir condiciones dinámicamente
+        $query = Productos::query();
+
+        // 3. Si hay un término de búsqueda, aplicamos el filtro
+        if ($search) {
+            // Buscamos que el término esté en el nombre O en el código
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('code', 'like', "%{$search}%");
+            });
+        }
+        
+        // 4. Ejecutamos la consulta y paginamos los resultados
+        // Paginator es ideal para listas largas. Muestra 10 por página.
+        $productos = $query->orderBy('name')->paginate(10);
+
+        // 5. Devolvemos la vista, pasándole los productos y el término de búsqueda
+        return view('cliente.search', compact('productos', 'search'));
+
+    }
+
+    public function new(Request $request){
+
+        // Pide a la DB que ordene los productos ANTES de traerlos.
+        // Usualmente para "nuevo" querrás 'desc' (descendente)
+        $productos = Productos::orderBy('created_at', 'desc')->get();
+    
+        return view('cliente.nuevos', compact('productos'));
+    }
     
 
 
@@ -115,8 +149,8 @@ class ProductosController extends Controller
             // Separar colores y subcategorias
             $colors = $data['colors'];
             unset($data['colors']);
-            $subcategorias = $data['subcategorias'];
-            unset($data['subcategorias']);
+            $subcategorias = $data['subcategoria_id'];
+            unset($data['subcategoria_id']);
     
             // Actualizar datos base
             $producto->update($data);

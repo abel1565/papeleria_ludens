@@ -34,28 +34,38 @@ new class extends Component
       <!-- Logo -->
       <div class="shrink-0 flex items-center">
         <a href="{{ route('dashboard') }}" wire:navigate>
-          <x-logo class="block h-16 w-16 fill-current" />
+           <x-application-logo  > </x-application-logo>
         </a>
         <span class="text-[#e6007e] font-bold text-2xl select-none ml-2" style="-webkit-text-stroke:1px white; text-stroke:1px white;">
         </span>
       </div>
 
       <!-- Barra de búsqueda -->
-      <form class="flex flex-1 min-w-[200px] max-w-full sm:max-w-[600px] w-full sm:w-auto mt-2 sm:mt-0 order-3 sm:order-2">
-        <label class="sr-only" for="search">Buscar</label>
-        <div class="relative w-full">
-          <input id="search" type="search" placeholder="Buscar por producto, categoría y más..." class="w-full rounded-md py-2 pl-10 pr-4 text-gray-700 text-sm sm:text-base leading-tight focus:outline-none" />
-          <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm sm:text-lg pointer-events-none"></i>
-        </div>
-      </form>
+      <form method="GET"  
+      action="{{ route('cliente.buscar') }}" 
+      class="flex flex-1 min-w-[200px] max-w-full sm:max-w-[600px] w-full sm:w-auto mt-2 sm:mt-0 order-3 sm:order-2">
+    
+    <label class="sr-only" for="search">Buscar</label>
+    <div class="relative w-full">
+      <input id="search" 
+             type="search" 
+             name="search" {{-- 3. NAME AÑADIDO (¡CRUCIAL!) --}}
+             value="{{ request('search') }}" {{-- Opcional: mantiene el texto --}}
+             placeholder="Buscar por producto, categoría y más..." 
+             class="w-full rounded-md py-2 pl-10 pr-4 text-gray-700 text-sm sm:text-base leading-tight focus:outline-none" />
+      
+      <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm sm:text-lg pointer-events-none"></i>
+    </div>
+</form>
+
 
       <!-- Botón carrito -->
       <a href="{{ route('carrito.carrito') }}" 
-         class="relative text-xl sm:text-xl hover:text-pink-400 transition order-2 sm:order-3"
+         class="relative text-xl sm:text-xl text-white  hover:text-pink-400 transition order-2 sm:order-3"
          aria-label="Carrito de compras"> Mi carrito
       </a>
       <a href="{{ route('cliente.compras') }}" 
-         class="relative text-xl sm:text-xl hover:text-pink-400 transition order-2 sm:order-3"
+         class="relative text-xl sm:text-xl  text-white hover:text-pink-400 transition order-2 sm:order-3"
          aria-label="Carrito de compras"> Mis compras 
       </a>
 
@@ -93,13 +103,19 @@ new class extends Component
       <div class="w-full border-b border-gray-300">
         <div class="max-w-[1200px] mx-auto px-4">
           <ul class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-black text-base py-3 select-none">
-            <li class="flex items-center space-x-2 cursor-pointer whitespace-nowrap text-text-white font-semibold">
-              </span><i class="fas fa-sun animate-spin-slow"></i><span class="text-white hover:text-pink-400 ">LO NUEVO</span>
-            </li>
+          <li>
+  <a href="{{ route('cliente.nuevo') }}" class="flex items-center space-x-2 whitespace-nowrap font-semibold text-white hover:text-pink-400">
+    <i class="fas fa-sun animate-spin-slow"></i>
+    <span>LO NUEVO</span>
+  </a>
+</li>
             
   
             <li class="flex items-center text-white hover:text-pink-400 space-x-2 cursor-pointer whitespace-nowrap">
-              <i class="fas fa-shopping-bag"></i><span>QUIERO COMPRAR</span>
+            <a href="{{ route('cliente.quierocomprar') }}" class="flex items-center space-x-2 whitespace-nowrap font-semibold text-white hover:text-pink-400">
+              <i class="fas fa-sun animate-spin-slow"></i>
+              <span>QUIERO COMPRAR</span>
+            </a>
             </li>
             <li class="relative group cursor-pointer font-semibold whitespace-nowrap">
               <div class="flex items-center gap-1">
@@ -126,10 +142,10 @@ new class extends Component
               </div>
             </li>
             <li class="flex items-center space-x-2 text-white hover:text-pink-400 cursor-pointer whitespace-nowrap">
-              <i class="fas fa-phone"></i><span>CONTACTO</span>
-            </li>
-            <li class="flex items-center space-x-2 text-white hover:text-pink-400  cursor-pointer whitespace-nowrap">
-              <i class="fas fa-phone"></i><span>COMO COMPRAR</span>
+            <a href="{{ route('cliente.contacto') }}" class="flex items-center space-x-2 whitespace-nowrap font-semibold text-white hover:text-pink-400">
+              <i class="fas fa-sun animate-spin-slow"></i>
+              <span>CONTACTO</span>
+            </a>
             </li>
           </ul>
         </div>

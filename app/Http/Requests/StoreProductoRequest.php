@@ -48,8 +48,7 @@ class StoreProductoRequest extends FormRequest
             //validacion de categorias
             // Regla para una sola imagen
             'image' => 'sometimes|image|mimes:jpg,jpeg,png|max:2048', 
-            'subcategorias' => 'required|array|min:1',
-                'subcategorias.*' => 'exists:subcategoria,id',
+            'subcategoria_id' => 'required|exists:subcategoria,id',
             
         ];
     }

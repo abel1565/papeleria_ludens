@@ -16,13 +16,8 @@ new class extends Component
 }; ?>
 <div class="w-64 h-screen bg-blue-900 text-white flex flex-col shadow-lg">
     <!-- Logo -->
-    <div class="flex items-center justify-center py-6 border-b border-white/20">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-auto" viewBox="0 0 200 50" fill="none">
-            <text x="0" y="35" font-size="32" font-family="font-semibold" 
-                  fill="#E91E63" stroke="white" stroke-width="1.5">
-                d´novac
-            </text>
-        </svg>
+    <div class="flex items-center justify-center py-6 border-b ">
+        <x-application-logo></x-application-logo>
     </div>
 
     <!-- Menú -->

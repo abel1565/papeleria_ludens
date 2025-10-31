@@ -11,11 +11,6 @@
                 class="h-6 w-auto">
             <a href="https://www.mercadolibre.com.mx/pagina/novedacticfabricantes">Comprar en Mercado Libre</a>
         </div>
-        <div class="bg-yellow-300 flex items-center gap-2 px-3 py-2 rounded">
-            <img src="{{ asset('/mercadolibre.svg') }}" 
-                class="h-6 w-auto">
-            <a href="">Comprar en Mercado Libre</a>
-        </div>
 
     </div>
 </x-slot>

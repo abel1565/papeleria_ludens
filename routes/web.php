@@ -74,14 +74,21 @@ Route::get('order/user/miscompras/{order}',[UsersController::class,'productoscom
 
 
 Route::view('order/user/thanyou','cliente.thankyou') ->middleware(['auth', 'role:cliente-mayoreo'])->name('cliente.thankyou');
+Route::view('order/user/contacto','cliente.contacto') ->middleware(['auth', 'role:cliente-mayoreo'])->name('cliente.contacto');
+Route::view('order/user/quiero-comprar','cliente.quierocomprar') ->middleware(['auth', 'role:cliente-mayoreo'])->name('cliente.quierocomprar');
 
 
+Route::get ('dashboard/lo-nuevo/productos',[ProductosController::class,'new'])->middleware(['auth', 'role:cliente-mayoreo'])->name('cliente.nuevo');
+Route::get ('search/productos',[ProductosController::class,'search'])->middleware(['auth', 'role:cliente-mayoreo'])->name('cliente.buscar');
 
 
 
 
 Route::view('car/producto','productos.productoid') ->middleware(['auth', 'role:cliente-mayoreo'])->name('productos.productoid');
 
+Route::get('/order/user/clientes/ventas',[UsersController::class,'ordenCliente'])->middleware (['auth', 'role:trabajador'])->name('vendedor.cliente');
+Route::get('/order/user/clientes/ventas/{order}',[UsersController::class,'ccomprasCliente'])->middleware (['auth', 'role:trabajador'])->name('vendedor.compras');
+Route::put('/order/user/clientes/ventas/{order}',[UsersController::class,'OrderUpdate'])->middleware (['auth', 'role:trabajador'])->name('vendedor.modificar');
 
 
 

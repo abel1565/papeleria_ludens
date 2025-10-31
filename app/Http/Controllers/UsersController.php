@@ -216,6 +216,11 @@ class UsersController extends Controller
         }
     }
 
+
+
+
+
+    
     public function productoscompras(Order $order){
 
         $items = $order->Items()->with('producto')->get();
@@ -230,20 +235,58 @@ class UsersController extends Controller
 
 
 
-    public function ordenes(Request $requets){
+    public function ordenCliente(Request $request)
+    {
         try {
-            $user_vendedor= auth()->id();
-            $user_cliente=User::where(' vendedor_id',$user_vendedor)->get();
-
-            $order_client=Order::where('user_id',$user_cliente)
-                    ->orderBy('created_at','desc')
-                    ->get();            //obtener una consulta para iobtener las  ordenes de compra 
-        } catch (\Exception $e) { 
-                    \Log::error($e->getMessage());
-        
-                    return back()->with('error', 'Hubo un problema al obtener tus compras. Intenta más tarde.');
+            // ID del vendedor autenticado
+            $vendedorId = auth()->id();
+    
+            // Obtenemos los IDs de los clientes creados por ese vendedor
+            $clientesIds = User::where('vendedor_id', $vendedorId)->pluck('id');
+    
+            // Obtenemos las órdenes de esos clientes
+            $ordenes = Order::whereIn('user_id', $clientesIds)
+                ->with('items.producto') // opcional: eager loading
+                ->orderBy('created_at', 'desc')
+                ->get();
+    
+            // Retornamos la vista con los datos
+            return view('vendedor.ordenes', compact('ordenes'));
+            
+        } catch (\Exception $e) {
+            \Log::error($e->getMessage());
+            return back()->with('error', 'Hubo un problema al obtener tus compras. Intenta más tarde.');
         }
     }
+    public function ccomprasCliente(Order $order){
+
+        $items = $order->Items()->with('producto')->get();
+        $direccion = $order->address;
+
+        return view('vendedor.comprasproductos', compact('order','items', 'direccion'));
+       
+    }
+    public function OrderUpdate(Request $request, $id){
+        $request->validate([
+            'status' => 'required|in:pending,paid,shipped,delivered,cancelled'
+        ]);
+        $orden = Order::findOrFail($id);
+
+    // Solo el vendedor creador puede actualizarla (opcional)
+    $vendedorId = auth()->id();
+    $cliente = $orden->user;
+    if ($cliente->vendedor_id !== $vendedorId) {
+        abort(403, 'No tienes permiso para actualizar esta orden.');
+    }
+
+    $orden->status = $request->status;
+    $orden->save();
+
+    return back()->with('success', 'Estado de la orden actualizado correctamente.');
+}
+
+    
+    
 
 
 

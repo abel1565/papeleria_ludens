@@ -1,26 +1,17 @@
-<nav class="-mx-3 flex flex-1 justify-end">
+<nav class="flex justify-center">
     @auth
         <a
             href="{{ url('/dashboard') }}"
-            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+            class="bg-pink-600 text-white hover:bg-pink-700 px-8 py-4 rounded-lg text-lg font-semibold transition-colors"
         >
-            Dashboard
+            Ir al Incio
         </a>
     @else
         <a
             href="{{ route('login') }}"
-            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+            class="bg-pink-600 text-white hover:bg-pink-700 px-8 py-4 rounded-lg text-lg font-semibold transition-colors"
         >
-            Log in
+            Ingresar
         </a>
-
-        @if (Route::has('register'))
-            <a
-                href="{{ route('register') }}"
-                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-            >
-                Register
-            </a>
-        @endif
     @endauth
 </nav>

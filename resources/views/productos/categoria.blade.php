@@ -17,11 +17,6 @@
             --}}
             @forelse ($subcategoria->productos as $producto)
                 
-                {{-- 
-                  CARD DEL PRODUCTO
-                  - Se quitó: bg-white, border, shadow, rounded-xl
-                  - Es solo un contenedor flex-col
-                --}}
                 <div class="flex flex-col">
                     
                     {{-- IMAGEN --}}
