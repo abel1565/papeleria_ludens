@@ -1,1 +1,1 @@
-<img src="{{ asset('/D´novacLogo.png')}}" alt="{{ route('dashboard') }}" class="block h-16 w-auto fill-current">
+<img src="{{ asset('/DnovacLogo.png')}}" alt="{{ route('dashboard') }}" class="block h-16 w-auto fill-current">

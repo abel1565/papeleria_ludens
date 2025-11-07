@@ -21,7 +21,7 @@
             <div class="flex flex-1 items-center justify-center bg-white">
                 <div class="p-8">
                     <img 
-                        src="{{ asset('/D´novacLogo.png')}}" 
+                        src="{{ asset('/DnovacLogo.png')}}" 
                         alt="D'novac Logo" 
                         class="w-80 h-auto opacity-90"
                     />
@@ -45,3 +45,8 @@
                             <livewire:welcome.navigation />
                         </div>
                     @endif
+
+
+                    <x-app-layout>
+                        
+                    </x-app-layout>
