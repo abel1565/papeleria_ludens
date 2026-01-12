@@ -65,11 +65,17 @@
                   6. Precio (mt-auto lo empuja al fondo):
                   - Mantuve tu lógica de 'mt-auto', es excelente.
                 --}}
-                <div class="mt-auto pt-3">
-                    <span class="text-xl font-bold text-gray-900">
-                        ${{ number_format($producto->price, 2) }}
-                    </span>
-                </div>
+                    @auth
+                    <div class="mt-auto pt-3">
+                        <span class="text-xl font-bold text-gray-900">
+                            ${{ number_format($producto->price, 2) }}
+                        </span>
+                    </div>
+                    @else
+                        <div class="text-gray-500 text-sm">
+                            Inicia sesión para ver el precio
+                        </div>
+                    @endauth
             </div>
         </div>
 

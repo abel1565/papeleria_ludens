@@ -24,8 +24,8 @@
       <div id="carousel" class="flex space-x-6 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory px-2">
         
         <!-- Card 1 -->
-        <article class="flex-shrink-0 snap-center w-72 rounded-2xl shadow-lg bg-white overflow-hidden relative">
-          <img src="{{ asset('/Laminas.png')}}" 
+        <article class="flex-shrink-0 snap-center w-flex rounded-2xl shadow-lg bg-white overflow-hidden relative">
+          <img src="{{ asset('/CATEGORIA_ESCOLAR.jpg')}}" 
                alt="Cuadernos" 
                class="w-full h-96 object-cover rounded-t-2xl" />
           <div class="p-4 bg-white rounded-b-2xl shadow-md">
@@ -57,7 +57,7 @@
         </article>
 
         <!-- Card 2 -->
-        <article class="flex-shrink-0 snap-center w-72 rounded-2xl shadow-lg bg-white overflow-hidden relative">
+        <article class="flex-shrink-0 snap-center w-flex rounded-2xl shadow-lg bg-white overflow-hidden relative">
           <img src="{{ asset('/Carrucel _ Stikers.png')}}"  
                alt="Plumas y lápices" 
                class="w-full h-96 object-cover rounded-t-2xl" />

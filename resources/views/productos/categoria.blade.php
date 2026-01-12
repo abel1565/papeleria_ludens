@@ -42,11 +42,17 @@
                         </div>
                         
                         {{-- Precio (mt-auto empuja esto y el botón al final) --}}
-                        <div class="mt-auto pt-3">
-                            <span class="text-xl font-bold text-gray-900 dark:text-white">
+                                     @auth
+                        <div class="flex items-center justify-between mt-auto mb-4">
+                            <span class="text-2xl font-extrabold text-gray-900 dark:text-white">
                                 ${{ number_format($producto->price, 2) }}
                             </span>
                         </div>
+                    @else
+                        <div class="text-gray-500 text-sm">
+                            Inicia sesión para ver el precio
+                        </div>
+                    @endauth
                         
              
                     </div>

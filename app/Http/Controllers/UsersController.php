@@ -200,22 +200,20 @@ class UsersController extends Controller
 
 
  
-    public function compras (Request $request){
-        try {
-            $user = auth()->id();
+    public function compras(Request $request)
+{
+    $user = auth()->id();
 
-            $mycompras = Order::where('user_id', $user)
-                ->orderBy('created_at', 'desc')
-                ->get();
-
-            return view('cliente.compras', compact('mycompras'));
-        } catch (\Exception $e) { 
-            \Log::error($e->getMessage());
-
-            return back()->with('error', 'Hubo un problema al obtener tus compras. Intenta más tarde.');
-        }
+    if (!$user) {
+        return redirect()->route('login')->with('success', 'Primero debes ser un cliente registrado para ver tus compras.');
     }
 
+    $mycompras = Order::where('user_id', $user)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return view('cliente.compras', compact('mycompras'));
+}
 
 
 

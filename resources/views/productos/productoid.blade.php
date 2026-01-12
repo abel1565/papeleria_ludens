@@ -36,10 +36,21 @@
       <span class="font-semibold">{{ $producto->description }}</span> 
     </p>
 
+
+
+
     <div class="mb-8">
-      <p class="font-extrabold text-lg text-gray-900">
-        Precio por Pieza: <span class="text-pink-600">${{ number_format($producto->price, 2) }}</span>
-      </p>
+
+    @auth
+                    <p class="font-extrabold text-lg text-gray-900">
+                      Precio por Pieza: <span class="text-pink-600">${{ number_format($producto->price, 2) }}</span>
+                    </p>
+                    @else
+                        <div class="text-gray-500 text-sm">
+                            Inicia sesión para ver el precio
+                        </div>
+                    @endauth
+
       <p class="font-extrabold text-lg text-gray-900">Paquete con {{$producto->pieces_per_package }} piezas</p>
       <p class="text-blue-600 font-semibold mt-2">Empaque con {{$producto->pieces_per_box }} Piezas</p>
       <p class="text-pink-600 font-bold text-sm">

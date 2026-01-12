@@ -22,11 +22,17 @@
                     <div class="flex items-center text-sm text-gray-500 dark:text-gray-300 mb-4">
                         Código: <span class="ml-2 font-medium">{{ $producto->code }}</span>
                     </div>
-                    
-                    <div class="flex items-center justify-between mt-auto mb-4">
-                        <span class="text-2xl font-extrabold text-gray-900 dark:text-white">${{ number_format($producto->price, 2) }}</span>
-                    </div>
-                    
+                    @auth
+                        <div class="flex items-center justify-between mt-auto mb-4">
+                            <span class="text-2xl font-extrabold text-gray-900 dark:text-white">
+                                ${{ number_format($producto->price, 2) }}
+                            </span>
+                        </div>
+                    @else
+                        <div class="text-gray-500 text-sm">
+                            Inicia sesión para ver el precio
+                        </div>
+                    @endauth
                     <div class="flex flex-col sm:flex-row items-center justify-between mt-4 gap-3">
                         <a href="{{ route('admin.edit', $producto->id) }}" class="flex-1 w-full text-white bg-blue-600 hover:bg-pink-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-300 ease-in-out">
                             Ver Producto

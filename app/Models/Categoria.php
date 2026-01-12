@@ -15,7 +15,8 @@ class Categoria extends Model
     // Campos que se pueden asignar masivamente
     protected $fillable = [
        
-        'categoria'
+        'categoria',
+        'status'
     ];
     public function subcategoria(){
         return $this->hasMany(Subcategoria::class,'categoria_id');

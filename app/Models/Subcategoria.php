@@ -17,6 +17,7 @@ class Subcategoria extends Model
     protected $fillable = [
         'categoria_id',
         'subcategoria',
+        'status',
     ];
 
     // Casts para asegurar tipos correctos

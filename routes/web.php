@@ -11,9 +11,9 @@ use App\Http\Controllers\OrderController;
 
 
 
-Route::view('/', 'welcome');
 
-Route::view('dashboard', 'dashboard') ->middleware(['auth', 'role:cliente-mayoreo'])->name('dashboard');
+
+Route::view('/', 'dashboard') ->name('dashboard');
 
 Route::get('/admin/dashboard', function () {return view('admin.dashboard');})->middleware(['auth', 'role:super-admin'])->name('admin.dashboard');
 Route::get('/vendedor/dashboard', function () {return view('vendedor.dashboard');})->middleware(['auth', 'role:trabajador'])->name('vendedor.dashboard');
@@ -74,12 +74,12 @@ Route::get('order/user/miscompras/{order}',[UsersController::class,'productoscom
 
 
 Route::view('order/user/thanyou','cliente.thankyou') ->middleware(['auth', 'role:cliente-mayoreo'])->name('cliente.thankyou');
-Route::view('order/user/contacto','cliente.contacto') ->middleware(['auth', 'role:cliente-mayoreo'])->name('cliente.contacto');
-Route::view('order/user/quiero-comprar','cliente.quierocomprar') ->middleware(['auth', 'role:cliente-mayoreo'])->name('cliente.quierocomprar');
+Route::view('order/user/contacto','cliente.contacto') ->name('cliente.contacto');
+Route::view('order/user/quiero-comprar','cliente.quierocomprar')->name('cliente.quierocomprar');
 
 
-Route::get ('dashboard/lo-nuevo/productos',[ProductosController::class,'new'])->middleware(['auth', 'role:cliente-mayoreo'])->name('cliente.nuevo');
-Route::get ('search/productos',[ProductosController::class,'search'])->middleware(['auth', 'role:cliente-mayoreo'])->name('cliente.buscar');
+Route::get ('dashboard/lo-nuevo/productos',[ProductosController::class,'new'])->name('cliente.nuevo');
+Route::get ('search/productos',[ProductosController::class,'search'])->name('cliente.buscar');
 
 
 

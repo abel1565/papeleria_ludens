@@ -1,9 +1,16 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Banner -->
-        <div class="w-full overflow-hidden rounded-lg mb-10">
-            <img src="{{ asset('/CompraTusFavoritos.png')}}" alt="Banner de Contacto" class="w-full h-auto object-cover">
-        </div>
+        
+
+       <x-banners :images="[
+            'Banner_mercadolibre.jpg',
+            'CompraTusFavoritos.png',
+            'Banner_ Agenda.jpg',
+            'Banner_colores.jpg',
+            'Banner_Maqueta.jpg',
+            'Banner_Novedactic.jpg']"/>
+
+            <br>
 
         <!-- Grid de dos columnas -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">

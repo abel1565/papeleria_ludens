@@ -2,6 +2,7 @@
 
 use App\Livewire\Actions\Logout;
 use App\Models\Categoria;
+use App\Models\Subcategoria;
 use Livewire\Volt\Component;
 
 new class extends Component
@@ -12,10 +13,16 @@ new class extends Component
      */
     public function with(): array
     {
-        return [
-            'categoriasMenu' => Categoria::with('subcategoria')->get(),
-        ];
+      return [
+        'categoriasMenu' => Categoria::where('status', true)
+            ->with(['subcategoria' => function ($query) {
+                $query->where('status', true);
+            }])
+            ->get(),
+    ];
+    
     }
+
 
     /**
      * Log the current user out of the application.
@@ -59,15 +66,19 @@ new class extends Component
 </form>
 
 
+
       <!-- Botón carrito -->
       <a href="{{ route('carrito.carrito') }}" 
          class="relative text-xl sm:text-xl text-white  hover:text-pink-400 transition order-2 sm:order-3"
          aria-label="Carrito de compras"> Mi carrito
       </a>
+
       <a href="{{ route('cliente.compras') }}" 
          class="relative text-xl sm:text-xl  text-white hover:text-pink-400 transition order-2 sm:order-3"
          aria-label="Carrito de compras"> Mis compras 
       </a>
+
+      @auth
 
       <!-- Dropdown usuario -->
       <div class="flex items-center gap-6 text-white font-semibold text-sm sm:text-base whitespace-nowrap mt-2 sm:mt-0 order-2 sm:order-4">
@@ -96,6 +107,12 @@ new class extends Component
           </x-dropdown>
         </div>
       </div>
+      @else
+      <div class="elative text-xl sm:text-xl  text-white hover:text-pink-400 transition order-2 sm:order-3">
+        <livewire:welcome.navigation />
+      </div>
+      @endauth
+
     </div>
 
     <!-- Menú inferior -->
@@ -122,7 +139,7 @@ new class extends Component
                 <i class="fas fa-tag text-white"></i><span class="text-white hover:text-pink-400">PRODUCTOS</span><i class="fas fa-chevron-down text-sm"></i>
               </div>
               <div class="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-[calc(100vw-2rem)] sm:w-[1200px] bg-gray-100 border border-gray-200 shadow-xl rounded-lg overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200 z-[100]">
-                <div class="grid grid-cols-1 sm:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
+                <div class="grid grid-cols-1 sm:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
                   @foreach ($categoriasMenu as $categoria)
                     <section class="px-6 py-6 flex flex-col items-center bg-white">
                       <div class="flex items-center gap-2 mb-3 text-gray-700">
@@ -162,6 +179,8 @@ new class extends Component
       </div>
     </div>
   </div>
+  @auth
+
 
   <!-- Menú móvil desplegable -->
   <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
@@ -183,4 +202,11 @@ new class extends Component
       </div>
     </div>
   </div>
+  @endauth
+
 </nav>
+
+
+
+
+
